@@ -449,6 +449,348 @@ int traverse(TreeNode* root){
     
 };
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+ 
+ 190. Reverse Bits
+ 
+ 
+ 
+ 191. Number of 1 Bits....................................I M P.......................................................................................................
+ 
+ class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+      int cnt=0;
+    while(n>0)
+    {
+        if (n%2!=0)
+        { cnt++;}
+        
+            n=n/2;
+    }
+    return cnt;
+    }
+};
+ 
+ 202. Happy Number...........................I M P..................................................................................................................
+ 
+ class Solution {
+public:
+    bool isHappy(int n) {
+    //condition imp ................................................................................................................................................
+        if(n <= 10){
+    if(n==1 | n == 7 | n == 10){
+        return true;
+    }
+    else{ return false;}
+}
+        
+        int sum=0;
+       while (n!=0)
+       {
+            
+            int k=n%10;
+            sum=sum+k*k;
+            n=n/10;
+       }
+        return (isHappy(sum));
+    }
+};
+ 
+ 206. Reverse Linked List................................I M P.........................................................................................................
+ 
+ /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        
+        ListNode *p=head;
+        stack<int>s;
+        if(head == NULL) return head;
+        while (p!=nullptr)
+        {
+            s.push(p->val);
+            p=p->next;
+        }
+        p=head;
+        while (p!=NULL)
+        {
+            p->val=s.top();
+            s.pop();
+            p=p->next;
+        }
+        return head;
+    }
+};
+ 
+ 217. Contains Duplicate
+ 
+ ............................................ERROR TIME LIMIT EXCEED HOGA for bada vector........................................................................................
+ class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        for (int i=0;i<nums.size();i++)
+        {
+            for (int j=i+1;j<nums.size();j++)
+            {
+                 if (nums[i]==nums[j])
+                     return true;
+            }
+           
+        }
+        return false;
+        
+    }
+};
+ 
+ ............................................................................RIGHT CODE ..............................................................................
+ 
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        
+        for(int i=0;i<nums.size()-1;i++)
+        {
+            if(nums[i]==nums[i+1])
+                return true;
+        }
+        return false;
+    }
+};
+
+ 234. Palindrome Linked List
+ 
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<int>s;
+        if (head==NULL ||head->next==NULL)
+            return true;
+        ListNode* p=head;
+        ListNode* q=head;
+        while (p!=NULL)
+        {
+            s.push(p->val);
+            p=p->next;
+        }
+        while (!s.empty())
+        {if (s.top()==q->val)
+        {
+            q=q->next;
+            s.pop();
+        }
+         else
+         {
+             return false;
+         }
+        
+        }
+        return true;
+    }
+};
+
+237. Delete Node in a Linked List
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        ListNode *p;
+        while (node->next!=NULL)
+        {
+            p=node;
+            node->val=node->next->val;
+            node=node->next;
+        }
+        //if p not declared and node =nullptr done ,not giving right ans .................I M P ....................................................................
+        p->next=nullptr;
+        
+    }
+};
+
+242. Valid Anagram
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int s_n=s.length();
+        int t_n=t.length();
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        if (s_n!=t_n)
+            return false;
+        int i=0,j=0;
+        while (i<s_n&&j<t_n)
+        {
+            if (s[i]==t[j])
+            {
+                i++;
+                j++;
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+};
+
+268. Missing Number
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        if (nums[n-1]!=n)
+            return n;
+        for (int i=0;i<n;i++)
+        {
+            if (nums[i]!=i)
+            return i;
+        }
+        return -1;
+    }
+};
+
+283. Move Zeroes...............................I M P..................................................................................................................
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int k=0;
+        int n=nums.size();
+         for(int i=0;i<n;i++)
+        {
+             if (nums[i]!=0)
+                {
+                 nums[k]=nums[i];
+                 k++;
+                }
+        }
+        while (k<n)
+        {
+            nums[k]=0;
+            k++;
+        }
+    }
+};
+
+326. Power of Three
+
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+    //base condition imp .............................................................................................................................................
+        if(n < 1)             return false;
+    
+    if(n == 1)            return true;
+    
+    if(n % 3 != 0)        return false;
+
+    return isPowerOfThree(n/3);
+}
+};
+
+344. Reverse String
+
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        for (int i=0;i<s.size()/2;i++)
+        {
+            char a=s[i];
+            s[i]=s[s.size()-i-1];
+            s[s.size()-i-1]=a;
+        }
+        for (int i=0;i<s.size();i++)
+        {
+            cout<<s[i];
+        }
+    }
+};
+
+350. Intersection of Two Arrays II..............................imp...................................................................................................
+
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        vector<int> ans;
+        int i=0,j=0;
+        while(i<nums1.size()&&j<nums2.size())
+        {
+            if (nums1[i]<nums2[j])
+                i++;
+            else if (nums1[i]>nums2[j])
+                j++;
+            else
+            {
+                ans.push_back(nums1[i]);
+                i++;
+                j++;
+            }
+        }
+        
+        return ans;
+    }
+};
+
+387. First Unique Character in a String
+
+
+
+412. Fizz Buzz
+
+class Solution {
+public:
+    vector<string> fizzBuzz(int n) {
+        vector<string>v;
+        for (int i=1;i<=n;i++)
+        {
+            if (i%3==0 && i%5==0)
+                v.push_back("FizzBuzz");
+            else if (i%3==0)
+                v.push_back("Fizz");
+            else if (i%5==0)
+                v.push_back("Buzz");
+            else 
+                //imp to_string(i)....................................................................................................................................
+                v.push_back(to_string(i));
+        }
+        return v;
+        
+    }
+};
+
+
+
 
 
 
