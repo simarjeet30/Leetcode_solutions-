@@ -12,7 +12,8 @@ public:
                 {
                     ans.push_back(i);
                     ans.push_back(j);
-                    
+                    //here return becoz if 2 elements found we need to stop traversing
+                    return (ans);
                 }
             }
         }return (ans);
@@ -47,6 +48,29 @@ public:
     }
     
     
+};
+///////////////////////alternate ,less time complexity////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        long int t=x;
+        long int p=0;
+        if (x<0)
+            return false;
+        
+        if (x/10==0)
+            return true;
+        while (x!=0)
+        {
+            p=p*10;
+            p+=x%10;
+            x/=10;
+        }
+        if (p!=t)
+            return false;
+        return true;
+    }
 };
 
 
