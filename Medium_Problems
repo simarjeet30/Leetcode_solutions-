@@ -126,3 +126,37 @@ public:
         return max1;
     }
 };
+
+2181. Merge Nodes in Between Zeros
+
+/** 
+* Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeNodes(ListNode* head) {
+        ListNode *t2=head->next;
+        int sm = 0;
+        while(t2->val!=0){
+            sm += t2->val;
+            t2 = t2->next;
+        }
+        ListNode *temp = new ListNode(sm);
+        if(t2->next==NULL){
+            return temp;
+        }
+        else{
+            temp->next = mergeNodes(t2);
+        }
+        return temp;
+    }
+};
+
+
