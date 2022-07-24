@@ -68,6 +68,49 @@ public:
     }
 };
 
+807. Max Increase to Keep City Skyline
+
+///////////////////////////////////////////////////////////IMP LOGIC///////////////////////////////////////////////////////////////////////////////////////////////////
+class Solution {
+public:
+    int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
+vector<int >row,column;
+int max=-1,sum=0;
+for(int j=0;j<grid.size();j++){
+for(int i=0;i<grid.size();i++){
+if(grid[j][i]>max) max=grid[j][i];
+}
+row.push_back(max);
+max=-1;
+}
+        for (int i=0;i<row.size();i++)
+        {
+            cout<<row[i];
+        }
+for(int j=0;j<grid.size();j++){
+for(int i=0;i<grid.size();i++){
+if(grid[i][j]>max) max=grid[i][j];
+}
+column.push_back(max);
+max=-1;
+}
+        for (int i=0;i<row.size();i++)
+        {
+            cout<<column[i];
+        }
+int minm;
+for(int i=0;i<grid.size();i++){
+for(int j=0;j<grid[i].size();j++){
+minm=min(row[i],column[j]);
+    
+sum+=abs(grid[i][j]-minm);
+    cout<<"\nsum"<<sum;
+}
+}
+return sum;
+}
+};
+
 1302. Deepest Leaves Sum
 
 /**
