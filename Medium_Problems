@@ -170,6 +170,32 @@ public:
     }
 };
 
+1769. Minimum Number of Operations to Move All Balls to Each Box
+
+class Solution {
+public:
+    vector<int> minOperations(string boxes) {
+        vector <int >ans ;
+        vector <int>index;
+        for (int i=0;i<boxes.size();i++)
+        {
+            if (boxes[i]=='1')
+                index.push_back(i);
+        }
+        
+        for (int i=0;i<boxes.size();i++)
+        {
+            int sum=0;
+            for (int j=0;j<index.size();j++)
+            {
+                sum+=abs(index[j]-i);
+            }
+            ans.push_back(sum);
+        }
+        return ans;
+    }
+};
+
 2181. Merge Nodes in Between Zeros
 
 /** 
