@@ -314,6 +314,123 @@ public:
     }
 };
 
+2125. Number of Laser Beams in a Bank
+
+class Solution {
+public:
+    int numberOfBeams(vector<string>& bank) {
+        int n=bank[0].size();
+         int m =bank.size();
+        vector<int>cnt(m,0);
+       
+        //logic
+        int s=0;
+        for (int i=0;i<m;i++)
+        {
+            for (int j=0;j<n;j++)
+            {
+                if (bank[i][j]=='1')
+                {
+                    cnt[i]++;
+                }
+            }
+        }
+        vector<int>res;
+        for (int i=0;i<m;i++)
+        {
+            if (cnt[i]!=0)
+            {
+                res.push_back(cnt[i]);
+            }
+        }
+        int ans=0;
+        
+        for (int i=0;i+1<res.size();i++)
+        {
+            ans+=res[i]*res[i+1];
+            
+        }
+        
+        
+        return ans;
+    }
+};
+
+2130. Maximum Twin Sum of a Linked List
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int sum=0;
+    int pairSum(ListNode* head) {
+//pehle vector me store krwa lo fir use krro 
+        vector<int>v;
+        while(head)
+        {
+            v.push_back(head->val);
+            head=head->next;
+            
+        }
+        int sum=0;
+        for (int i=0;i<v.size()+1/2;i++)
+        {
+             int m=v[i]+v[v.size()-1-i];
+            if (sum<m)
+            {
+                sum=m;
+            }
+        }return sum;
+    }
+};
+
+2149. Rearrange Array Elements by Sign
+
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> r;
+        vector <int> neg;
+        vector<int>pos;
+       int j=0,k=0;
+        for (int i=0;i<nums.size();i++)
+        {
+            if (nums[i]>=0)
+            {
+               pos.push_back(nums[i]);
+            }
+            else if (nums[i]<0)
+            {
+                neg.push_back(nums[i]);
+            }
+                
+        }
+        for (int i=0;i<nums.size();i++)
+        {
+            if (i%2==0)
+            {
+                r.push_back(pos[j]);
+                    j++;
+            }
+            else
+            {
+                r.push_back(neg[k]);
+                k++;
+            }
+        }
+        
+        return r;
+    }
+};
+
 2161. Partition Array According to Given Pivot
 
 class Solution {
