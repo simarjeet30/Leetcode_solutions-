@@ -1212,6 +1212,28 @@ public:
     }
 };
 
+746. Min Cost Climbing Stairs
+
+/////////////////////////////////////////imp/////////////////////////////////////////////////////////////
+class Solution {
+public:
+    int recursive_method(vector<int> &cost, int size, int i, vector<int> &dp)
+    {
+        if (i >= size)
+            return 0;
+        if (dp[i] != -1)
+            return dp[i];
+        //aage 1 step jaana h ya 2 uske lie
+        return (dp[i] = cost[i] + min(recursive_method(cost, size, i + 1, dp) , recursive_method(cost, size, i + 2, dp)));
+    }
+    int minCostClimbingStairs(vector<int>& cost) {
+        int size = cost.size(), i = 0;
+        vector<int> dp(size, -1);
+       // start me 0 se krna h ya 1 se uske liye 
+        return (min(recursive_method(cost, size, 0, dp), recursive_method(cost,  size, 1, dp)));
+    } 
+};
+
 1025. Divisor Game/////////////////////////////////////////////////////////imp//////////////////////////////////////////////////////////////////////////////////////
 
 class Solution {
@@ -1236,6 +1258,24 @@ public:
         vector<int>dp(n+5,-1);
         return fn(n,dp);
     }
+};
+
+1137. N-th Tribonacci Number
+
+//time complexity O(n)
+//recursion like fibonacci will have time complexity 3^n and not be storing values so dp 
+class Solution {
+public:
+    int tribonacci(int n) {
+        if (n<=1)
+            return n;
+        int dp[n+1];
+        dp[0]=0;dp[1]=1;dp[2]=1;
+        for (int i=3;i<=n;i++)
+        {
+        dp[i]=dp[i-1]+dp[i-2]+dp[i-3];
+    }
+        return dp[n];}
 };
 
 
