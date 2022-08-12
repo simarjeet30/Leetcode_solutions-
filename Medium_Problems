@@ -1,3 +1,31 @@
+152. Maximum Product Subarray
+
+class Solution {
+public:
+
+
+
+int maxProduct(vector<int>& nums) {
+        
+        int ans= nums[0];
+        
+        for(int i=1,maxi= ans, mini= ans ; i<nums.size();i++){
+            
+            if(nums[i]<0){
+                swap(maxi, mini);  
+            }
+            
+            maxi= max(nums[i], maxi*nums[i]);
+            
+            mini= min(nums[i], mini*nums[i]);
+            
+            ans= max(ans, maxi);
+        }
+        return ans;
+    }  
+    };
+    
+    
 179. Largest Number
 ///////////////////////////////////////////////imp////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -37,6 +65,30 @@ public:
         }
         return f;
     }
+};
+
+300. Longest Increasing Subsequence
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> m(n,1);
+        for (int i=0;i<n;i++)
+        {
+            for (int j=0;j<i;j++)
+            {
+                if (nums[i]>nums[j])
+                {
+                    m[i]=max(m[i],1+m[j]);
+                }
+            }
+            
+        }
+       
+        sort(m.begin(),m.end());
+       return m[n-1];
+    } 
 };
 
 654. Maximum Binary Tree
@@ -143,6 +195,36 @@ sum+=abs(grid[i][j]-minm);
 }
 return sum;
 }
+};
+
+1143. Longest Common Subsequence
+
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        int n=text1.size();
+        int m=text2.size();
+        int ans[n+1][m+1];
+         for (int i = 0; i <= n; i++)  
+            ans[i][0] = 0;  
+       for (int j = 0; j <= m; j++)  
+            ans[0][j] = 0;  
+        for (int i=1;i<=n;i++)
+        {
+            for (int j=1;j<=m;j++)
+            {
+                
+                if (text1[i-1]==text2[j-1])
+                {
+                    ans[i][j]=1+ans[i-1][j-1];
+                }
+                else
+                {
+                    ans[i][j]=max(ans[i-1][j-1],max(ans[i][j-1],ans[i-1][j]));
+                }
+            }
+        }return ans[n][m];
+    }
 };
 
 1282. Group the People Given the Group Size They Belong To
